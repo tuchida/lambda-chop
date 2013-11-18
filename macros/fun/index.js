@@ -32,14 +32,13 @@ macro $lc__placeholders {
 
     function makePlaceholders(stx) {
       var args = [];
-      var code = 97;
       return [go(stx), args];
 
       function go(ss) {
         return ss.map(function(s) {
           if (s.token.type === parser.Token.Punctuator &&
               s.token.value === '#') {
-            var ident = makeIdent(String.fromCharCode(code++), here);
+            var ident = makeIdent('arg' + fresh(), here);
             if (args.length) args.push(makePunc(','));
             args.push(ident);
             return ident;
